@@ -1,0 +1,73 @@
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Custom styles */
+.hero-gradient {
+    background: linear-gradient(135deg, #1a365d 0%, #2563eb 100%);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+}
+
+.news-card img {
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Form styles */
+.form-input:focus {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Custom button styles */
+.btn-primary {
+    background-color: #2563eb;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+/* Mobile menu styles */
+.mobile-menu {
+    transition: transform 0.3s ease-in-out;
+}
+
+.mobile-menu.open {
+    transform: translateX(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .hero-section {
+        height: 500px;
+    }
+}

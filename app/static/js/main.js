@@ -6,7 +6,7 @@ function showNotification(message, type = 'success') {
     }`;
     notification.textContent = message;
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
         notification.remove();
     }, 3000);

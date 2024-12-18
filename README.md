@@ -1,61 +1,78 @@
-# Python API Hub
+# LogiTrans - Логистическая компания
 
-Modern API Hub implementation using FastAPI and Python.
+Веб-приложение для логистической компании, разработанное с использованием FastAPI и современных веб-технологий.
 
-## Features
+## Функциональность
 
-- 🚀 Fast and modern API using FastAPI
-- 📝 Todo API with categories and priorities
-- 📒 Notes API with tags and search
-- 📊 Analytics API for tracking custom events
-- 🔐 JWT Authentication
-- 📚 Automatic API documentation (Swagger UI)
+- Расчет стоимости перевозки
+- Отслеживание заказов
+- Новости компании
+- Управление заказами
 
-## Setup
+## Технологии
 
-1. Create virtual environment:
+- Backend: FastAPI, SQLAlchemy, Pydantic
+- Frontend: HTML, CSS (Tailwind), JavaScript
+- База данных: SQLite
+- Шаблонизатор: Jinja2
+
+## Установка и запуск
+
+1. Клонируйте репозиторий:
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+git clone [URL репозитория]
+cd FreeAPI.python
 ```
 
-2. Install dependencies:
+2. Создайте и активируйте виртуальное окружение:
+```bash
+python -m venv venv
+source venv/bin/activate  # для Linux/Mac
+# или
+venv\Scripts\activate  # для Windows
+```
+
+3. Установите зависимости:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Run the application:
+4. Инициализируйте базу данных:
+```bash
+python -c "from app.db.init_db import init_db; init_db()"
+```
+
+5. Запустите приложение:
 ```bash
 uvicorn app.main:app --reload
 ```
 
-4. Open API documentation:
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
+6. Откройте в браузере: http://localhost:8000
 
-## API Endpoints
+## Структура проекта
 
-### Authentication
-- POST /auth/register - Register new user
-- POST /auth/login - Login user
-- GET /auth/me - Get current user info
+```
+app/
+├── api/
+│   └── routes/          # Маршруты API
+├── core/               # Основные настройки
+├── db/                 # Работа с базой данных
+├── models/            # Модели SQLAlchemy
+├── schemas/           # Схемы Pydantic
+├── static/            # Статические файлы
+│   ├── css/
+│   ├── js/
+│   └── img/
+└── templates/         # HTML шаблоны
+```
 
-### Todo API
-- GET /api/todos - List all todos
-- POST /api/todos - Create new todo
-- GET /api/todos/{id} - Get todo by ID
-- PUT /api/todos/{id} - Update todo
-- DELETE /api/todos/{id} - Delete todo
+## Разработка
 
-### Notes API
-- GET /api/notes - List all notes
-- POST /api/notes - Create new note
-- GET /api/notes/{id} - Get note by ID
-- PUT /api/notes/{id} - Update note
-- DELETE /api/notes/{id} - Delete note
-- GET /api/notes/search - Search notes by content
+- Для добавления новых маршрутов создайте файл в директории `app/api/routes/`
+- Модели базы данных находятся в `app/models/`
+- Статические файлы добавляйте в соответствующие поддиректории в `app/static/`
+- Шаблоны страниц находятся в `app/templates/`
 
-### Analytics API
-- POST /api/analytics/event - Track custom event
-- GET /api/analytics/events - Get event statistics
-- GET /api/analytics/dashboard - Get analytics dashboard
+## Лицензия
+
+MIT

@@ -1,123 +1,261 @@
 {% extends "base.html" %}
 
-{% block title %}API Hub Documentation{% endblock %}
+{% block title %}LogiTrans - Главная{% endblock %}
 
 {% block content %}
-<div class="fade-in">
-    <div class="mb-8">
-        <h1 class="text-3xl font-bold text-white mb-4">API Hub</h1>
-        <p class="text-gray-400">Complete API documentation for managing notes and tasks</p>
+<!-- Hero Section -->
+<section class="relative h-[600px]">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700">
+        <img src="{{ url_for('static', path='img/hero-bg.jpg') }}" 
+             alt="Логистические перевозки"
+             class="w-full h-full object-cover opacity-30">
     </div>
-
-    <!-- Getting Started -->
-    <div class="mb-12">
-        <h2 class="text-xl font-semibold text-white mb-4">Getting Started</h2>
-        <div class="bg-gray-800 rounded-lg p-6">
-            <p class="text-gray-300 mb-4">To use the API, you'll need to authenticate first. Use the following endpoints:</p>
-            
-            <!-- Authentication Endpoints -->
-            <div class="space-y-4">
-                <div class="endpoint">
-                    <span class="method-badge method-post">POST</span>
-                    <span class="endpoint-url">/api/v1/auth/register</span>
-                </div>
-                <div class="endpoint">
-                    <span class="method-badge method-post">POST</span>
-                    <span class="endpoint-url">/api/v1/auth/login</span>
-                </div>
-            </div>
-
-            <!-- Code Example -->
-            <div class="mt-6">
-                <h3 class="text-sm font-medium text-gray-400 mb-2">Example Request</h3>
-                <pre><code class="language-python">
-import requests
-
-url = "http://localhost:8000/api/v1/auth/login"
-data = {
-    "username": "user@example.com",
-    "password": "your_password"
-}
-
-response = requests.post(url, json=data)
-token = response.json()["access_token"]
-                </code></pre>
+    <div class="absolute inset-0 flex items-center justify-center">
+        <div class="text-center text-white max-w-4xl px-4">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">LogiTrans - Ваш надежный партнер в логистике</h1>
+            <p class="text-xl md:text-2xl mb-8 text-blue-100">Быстрые и надежные перевозки по всей России и СНГ</p>
+            <div class="space-x-4">
+                <a href="#calculator" class="inline-flex items-center px-6 py-3 bg-yellow-500 text-blue-900 rounded-lg font-semibold hover:bg-yellow-400 transition-colors">
+                    <i class="fas fa-calculator mr-2"></i>Рассчитать стоимость
+                </a>
+                <a href="/contacts" class="inline-flex items-center px-6 py-3 bg-white text-blue-900 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-phone mr-2"></i>Связаться с нами
+                </a>
             </div>
         </div>
     </div>
+</section>
 
-    <!-- Available APIs -->
-    <div class="mb-12">
-        <h2 class="text-xl font-semibold text-white mb-4">Available APIs</h2>
-        
-        <!-- Notes API -->
-        <div class="bg-gray-800 rounded-lg p-6 mb-6">
-            <h3 class="text-lg font-medium text-white mb-4">Notes API</h3>
-            <div class="space-y-4">
-                <div class="endpoint">
-                    <span class="method-badge method-get">GET</span>
-                    <span class="endpoint-url">/api/v1/notes</span>
+<!-- Services Section -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-900">Наши услуги</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="fas fa-truck text-3xl text-blue-600"></i>
                 </div>
-                <div class="endpoint">
-                    <span class="method-badge method-post">POST</span>
-                    <span class="endpoint-url">/api/v1/notes</span>
+                <h3 class="text-xl font-semibold mb-4 text-center text-blue-900">Автомобильные перевозки</h3>
+                <p class="text-gray-600 text-center">Быстрая и надежная доставка грузов автотранспортом по всей России и СНГ</p>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="fas fa-train text-3xl text-blue-600"></i>
                 </div>
-                <div class="endpoint">
-                    <span class="method-badge method-put">PUT</span>
-                    <span class="endpoint-url">/api/v1/notes/{note_id}</span>
+                <h3 class="text-xl font-semibold mb-4 text-center text-blue-900">Железнодорожные перевозки</h3>
+                <p class="text-gray-600 text-center">Экономичная доставка крупных партий грузов на дальние расстояния</p>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <i class="fas fa-ship text-3xl text-blue-600"></i>
                 </div>
-                <div class="endpoint">
-                    <span class="method-badge method-delete">DELETE</span>
-                    <span class="endpoint-url">/api/v1/notes/{note_id}</span>
-                </div>
+                <h3 class="text-xl font-semibold mb-4 text-center text-blue-900">Морские перевозки</h3>
+                <p class="text-gray-600 text-center">Международные морские грузоперевозки с оптимальными маршрутами</p>
             </div>
         </div>
+    </div>
+</section>
 
-        <!-- Tasks API -->
-        <div class="bg-gray-800 rounded-lg p-6">
-            <h3 class="text-lg font-medium text-white mb-4">Tasks API</h3>
-            <div class="space-y-4">
-                <div class="endpoint">
-                    <span class="method-badge method-get">GET</span>
-                    <span class="endpoint-url">/api/v1/tasks</span>
+<!-- Calculator Section -->
+<section id="calculator" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-blue-900">Рассчитать стоимость</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <form class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Откуда</label>
+                            <input type="text" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                   placeholder="Город отправления">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Куда</label>
+                            <input type="text" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                   placeholder="Город назначения">
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Вес (кг)</label>
+                            <input type="number" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                   placeholder="Вес груза">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Объем (м³)</label>
+                            <input type="number" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                   placeholder="Объем груза">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Тип перевозки</label>
+                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="auto">Автомобильная</option>
+                            <option value="rail">Железнодорожная</option>
+                            <option value="sea">Морская</option>
+                        </select>
+                    </div>
+                    <button type="submit" 
+                            class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                        Рассчитать стоимость
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-900">Почему выбирают нас</h2>
+        <div class="grid md:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-clock text-3xl text-blue-600"></i>
                 </div>
-                <div class="endpoint">
-                    <span class="method-badge method-post">POST</span>
-                    <span class="endpoint-url">/api/v1/tasks</span>
+                <h3 class="text-xl font-semibold mb-2 text-blue-900">Точность</h3>
+                <p class="text-gray-600">98% доставок точно в срок</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-shield-alt text-3xl text-blue-600"></i>
                 </div>
-                <div class="endpoint">
-                    <span class="method-badge method-put">PUT</span>
-                    <span class="endpoint-url">/api/v1/tasks/{task_id}</span>
+                <h3 class="text-xl font-semibold mb-2 text-blue-900">Безопасность</h3>
+                <p class="text-gray-600">Страхование всех грузов</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-map-marked-alt text-3xl text-blue-600"></i>
                 </div>
-                <div class="endpoint">
-                    <span class="method-badge method-delete">DELETE</span>
-                    <span class="endpoint-url">/api/v1/tasks/{task_id}</span>
+                <h3 class="text-xl font-semibold mb-2 text-blue-900">Охват</h3>
+                <p class="text-gray-600">Доставка в 150+ городов</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-headset text-3xl text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2 text-blue-900">Поддержка</h3>
+                <p class="text-gray-600">24/7 обслуживание</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tracking Section -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-blue-900">Отследить груз</h2>
+            <form class="bg-white p-8 rounded-lg shadow-lg">
+                <div class="flex gap-4">
+                    <input type="text" 
+                           placeholder="Введите номер отслеживания" 
+                           class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           required>
+                    <button type="submit" 
+                            class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-search mr-2"></i>Отследить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- News Section -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-900">Последние новости</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="{{ url_for('static', path='img/news1.jpg') }}" 
+                     alt="Новость 1" 
+                     class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-900">Расширение автопарка</h3>
+                    <p class="text-gray-600 mb-4">Мы пополнили наш автопарк новыми современными грузовиками...</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Читать далее →</a>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="{{ url_for('static', path='img/news2.jpg') }}" 
+                     alt="Новость 2" 
+                     class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-900">Новый маршрут</h3>
+                    <p class="text-gray-600 mb-4">Открыт новый регулярный маршрут между Москвой и Владивостоком...</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Читать далее →</a>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <img src="{{ url_for('static', path='img/news3.jpg') }}" 
+                     alt="Новость 3" 
+                     class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2 text-blue-900">Международное партнерство</h3>
+                    <p class="text-gray-600 mb-4">Подписано соглашение о сотрудничестве с европейскими партнерами...</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Читать далее →</a>
                 </div>
             </div>
         </div>
     </div>
+</section>
+{% endblock %}
 
-    <!-- Response Examples -->
-    <div class="mb-12">
-        <h2 class="text-xl font-semibold text-white mb-4">Response Examples</h2>
-        
-        <div class="response-example">
-            <div class="response-header">
-                <span class="text-sm font-medium text-gray-300">Success Response</span>
-                <span class="text-xs text-green-400">200 OK</span>
-            </div>
-            <div class="response-body">
-                <pre><code class="language-json">
-{
-    "id": 1,
-    "title": "Sample Note",
-    "content": "This is a sample note content",
-    "created_at": "2024-12-18T10:00:00Z",
-    "updated_at": "2024-12-18T10:00:00Z"
-}
-                </code></pre>
-            </div>
-        </div>
-    </div>
-</div>
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Плавная прокрутка к секциям
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Анимация появления элементов при прокрутке
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fade-in');
+            }
+        });
+    });
+
+    document.querySelectorAll('.service-card, .feature-item').forEach((el) => {
+        observer.observe(el);
+    });
+
+    // Обработка формы калькулятора
+    const calculatorForm = document.querySelector('#calculator form');
+    if (calculatorForm) {
+        calculatorForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Здесь будет логика расчета стоимости
+            alert('Функция расчета стоимости находится в разработке');
+        });
+    }
+
+    // Обработка формы отслеживания
+    const trackingForm = document.querySelector('form');
+    if (trackingForm) {
+        trackingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Здесь будет логика отслеживания
+            alert('Функция отслеживания находится в разработке');
+        });
+    }
+});
+</script>
 {% endblock %}
