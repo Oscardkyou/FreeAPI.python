@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}API Hub Documentation{% endblock %}
+
+{% block content %}
+<div class="fade-in">
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-white mb-4">API Hub</h1>
+        <p class="text-gray-400">Complete API documentation for managing notes and tasks</p>
+    </div>
+
+    <!-- Getting Started -->
+    <div class="mb-12">
+        <h2 class="text-xl font-semibold text-white mb-4">Getting Started</h2>
+        <div class="bg-gray-800 rounded-lg p-6">
+            <p class="text-gray-300 mb-4">To use the API, you'll need to authenticate first. Use the following endpoints:</p>
+            
+            <!-- Authentication Endpoints -->
+            <div class="space-y-4">
+                <div class="endpoint">
+                    <span class="method-badge method-post">POST</span>
+                    <span class="endpoint-url">/api/v1/auth/register</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method-badge method-post">POST</span>
+                    <span class="endpoint-url">/api/v1/auth/login</span>
+                </div>
+            </div>
+
+            <!-- Code Example -->
+            <div class="mt-6">
+                <h3 class="text-sm font-medium text-gray-400 mb-2">Example Request</h3>
+                <pre><code class="language-python">
+import requests
+
+url = "http://localhost:8000/api/v1/auth/login"
+data = {
+    "username": "user@example.com",
+    "password": "your_password"
+}
+
+response = requests.post(url, json=data)
+token = response.json()["access_token"]
+                </code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Available APIs -->
+    <div class="mb-12">
+        <h2 class="text-xl font-semibold text-white mb-4">Available APIs</h2>
+        
+        <!-- Notes API -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-6">
+            <h3 class="text-lg font-medium text-white mb-4">Notes API</h3>
+            <div class="space-y-4">
+                <div class="endpoint">
+                    <span class="method-badge method-get">GET</span>
+                    <span class="endpoint-url">/api/v1/notes</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method-badge method-post">POST</span>
+                    <span class="endpoint-url">/api/v1/notes</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method-badge method-put">PUT</span>
+                    <span class="endpoint-url">/api/v1/notes/{note_id}</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method-badge method-delete">DELETE</span>
+                    <span class="endpoint-url">/api/v1/notes/{note_id}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks API -->
+        <div class="bg-gray-800 rounded-lg p-6">
+            <h3 class="text-lg font-medium text-white mb-4">Tasks API</h3>
+            <div class="space-y-4">
+                <div class="endpoint">
+                    <span class="method-badge method-get">GET</span>
+                    <span class="endpoint-url">/api/v1/tasks</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method-badge method-post">POST</span>
+                    <span class="endpoint-url">/api/v1/tasks</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method-badge method-put">PUT</span>
+                    <span class="endpoint-url">/api/v1/tasks/{task_id}</span>
+                </div>
+                <div class="endpoint">
+                    <span class="method-badge method-delete">DELETE</span>
+                    <span class="endpoint-url">/api/v1/tasks/{task_id}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Response Examples -->
+    <div class="mb-12">
+        <h2 class="text-xl font-semibold text-white mb-4">Response Examples</h2>
+        
+        <div class="response-example">
+            <div class="response-header">
+                <span class="text-sm font-medium text-gray-300">Success Response</span>
+                <span class="text-xs text-green-400">200 OK</span>
+            </div>
+            <div class="response-body">
+                <pre><code class="language-json">
+{
+    "id": 1,
+    "title": "Sample Note",
+    "content": "This is a sample note content",
+    "created_at": "2024-12-18T10:00:00Z",
+    "updated_at": "2024-12-18T10:00:00Z"
+}
+                </code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
