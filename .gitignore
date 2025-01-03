@@ -24,7 +24,17 @@ wheels/
 virtualenvs/
 venv/
 ENV/
-
+.venv/
+env/
+.env/
+.Python
+pyvenv.cfg
+.python-version
+bin/
+include/
+lib/
+lib64/
+share/
 
 # IDE
 .idea/
