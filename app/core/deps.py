@@ -8,7 +8,7 @@ from app.db.session import SessionLocal
 from app.core.config import settings
 from app.models.user import User
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login", auto_error=False)
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/auth/login")
 
 def get_db() -> Generator:
     try:
@@ -26,24 +26,32 @@ async def get_current_user(
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
-    
-    if not token:
-        raise credentials_exception
-        
     try:
         payload = jwt.decode(
-            token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
+            token,
+            settings.SECRET_KEY,
+            algorithms=[settings.ALGORITHM]
         )
-        user_id: Optional[int] = int(payload.get("sub"))
+        user_id: Optional[int] = payload.get("sub")
         if user_id is None:
             raise credentials_exception
-    except (JWTError, ValueError):
+    except JWTError:
         raise credentials_exception
-        
+    
     user = db.query(User).filter(User.id == user_id).first()
     if user is None:
         raise credentials_exception
     return user
+
+async def get_current_active_superuser(
+    current_user: User = Depends(get_current_user),
+) -> User:
+    if not current_user.is_superuser:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="The user doesn't have enough privileges"
+        )
+    return current_user
 
 async def get_current_user_optional(
     db: Session = Depends(get_db),

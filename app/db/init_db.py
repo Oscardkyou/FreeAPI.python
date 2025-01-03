@@ -1,58 +1,48 @@
 from sqlalchemy.orm import Session
 from app.db.base_class import Base
 from app.db.session import engine, SessionLocal
-from app.models.order import Order, ShipmentType
+from app.models.user import User
 from app.models.news import News
+from app.core.config import settings
 
-def init_db() -> None:
-    print("Creating database tables...")
-    Base.metadata.drop_all(bind=engine)  # Сбрасываем все таблицы
-    Base.metadata.create_all(bind=engine)  # Создаем заново
+def init_db(db: Session) -> None:
+    # Создаем все таблицы
+    Base.metadata.create_all(bind=engine)
     
-    # Создаем тестовые данные
-    db = SessionLocal()
-    try:
+    # Проверяем, есть ли уже тестовые данные
+    user = db.query(User).first()
+    if not user:
+        # Создаем тестового пользователя
+        user = User(
+            email="test@example.com",
+            username="testuser",
+            password="testpassword123"
+        )
+        db.add(user)
+        
         # Создаем тестовые новости
         news_items = [
             News(
                 title="Открытие нового маршрута",
-                content="Мы рады сообщить об открытии нового маршрута между городами Москва и Владивосток",
+                content="Мы рады сообщить об открытии нового маршрута доставки между городами Москва и Владивосток.",
                 image_url="/static/img/news1.jpg"
             ),
             News(
-                title="Расширение автопарка",
-                content="Наш автопарк пополнился новыми современными грузовиками",
+                title="Обновление автопарка",
+                content="Наша компания приобрела 10 новых грузовых автомобилей для улучшения качества обслуживания.",
                 image_url="/static/img/news2.jpg"
             ),
             News(
-                title="Международное сотрудничество",
-                content="Подписано соглашение о сотрудничестве с европейскими партнерами",
+                title="Специальное предложение",
+                content="Скидка 20% на международные перевозки в течение всего декабря!",
                 image_url="/static/img/news3.jpg"
             )
         ]
-        
         for news in news_items:
             db.add(news)
         
-        # Создаем тестовый заказ
-        test_order = Order(
-            tracking_number="TEST123456",
-            from_city="Москва",
-            to_city="Санкт-Петербург",
-            weight=100.0,
-            volume=2.5,
-            shipment_type=ShipmentType.AUTO,
-            status="в пути"
-        )
-        db.add(test_order)
-        
         db.commit()
-        print("Test data created successfully!")
-        
-    except Exception as e:
-        print(f"Error creating test data: {e}")
-        db.rollback()
-    finally:
-        db.close()
-    
-    print("Database initialization completed!")
+
+if __name__ == "__main__":
+    db = SessionLocal()
+    init_db(db)
